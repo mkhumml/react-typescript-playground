@@ -1,0 +1,90 @@
+.App {
+  display: flex;
+  justify-content: center;
+  gap: 2em;
+}
+
+.ButtonContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.ButtonContainer > * {
+  background-color: transparent;
+  border: none;
+  padding: 0.5em 0;
+  text-align: left;
+  font-size: 26px;
+  color: hsl(236, 100%, 87%);
+}
+.ButtonContainer > *:hover {
+  cursor: pointer;
+  color: white;
+}
+
+.ActivityCardContainer {
+  background-color: #d96c47;
+  border-radius: 1em;
+  width: 300px;
+}
+
+.ActivityCardContainer > * {
+  padding: 2em;
+}
+
+.ActivityCardImgContainer {
+  position: relative;
+  opacity: 0.15;
+  padding: 1.5em;
+}
+
+.ActivityContainer {
+  position: relative;
+  background-color: hsl(235, 46%, 20%);
+  border-radius: 1em;
+}
+
+.ActivityCardImg {
+  position: absolute;
+  right: 1em;
+  top: -0.5em;
+}
+
+.UserCardContainer {
+  background-color: hsl(235, 46%, 20%);
+  border-radius: 1em;
+  width: 300px;
+}
+
+.UserCardContainer > div:first-child {
+  padding: 2em;
+}
+
+.Head4 {
+  font-size: 66px;
+  margin-bottom: 16px;
+}
+
+.UserContainer {
+  background-color: hsl(246, 80%, 60%);
+  border-radius: 1em;
+  display: flex;
+  flex-direction: column;
+}
+
+.Img {
+  height: 70px;
+  width: 70px;
+  margin-bottom: 2.5em;
+  border: 2px solid white;
+  border-radius: 3em;
+}
+
+.Head2 {
+  color: hsl(236, 100%, 87%);
+}
+
+.Head1 {
+  word-break: break-word;
+  margin-bottom: 1.5em;
+}
