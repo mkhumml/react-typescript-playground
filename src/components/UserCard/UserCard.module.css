@@ -1,0 +1,81 @@
+.UserCardContainer {
+  background-color: hsl(235, 46%, 20%);
+  border-radius: 1em;
+  /*width: 300px;*/
+  min-width: 264px;
+}
+
+.UserCardContainer > div:first-child {
+  padding: 2em;
+}
+
+.UserContainer {
+  background-color: hsl(246, 80%, 60%);
+  border-radius: 1em;
+  display: flex;
+  flex-direction: column;
+}
+.Img {
+  height: 70px;
+  width: 70px;
+  margin-bottom: 2.5em;
+  border: 2px solid white;
+  border-radius: 3em;
+}
+
+.Head2 {
+  color: hsl(236, 100%, 87%);
+}
+
+.Head1 {
+  word-break: break-word;
+  margin-bottom: 1.5em;
+}
+
+.ButtonContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 1em 2em;
+}
+
+.ButtonContainer > * {
+  background-color: transparent;
+  border: none;
+  padding: 0.5em 0;
+  text-align: left;
+  font-size: 26px;
+  color: hsl(236, 100%, 87%);
+}
+.ButtonContainer > *:hover {
+  cursor: pointer;
+  color: white;
+}
+
+@media only screen and (max-width: 600px) {
+  .Head1 {
+    margin-bottom: 0;
+  }
+  .UserContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  .HeadContainer {
+    padding-left: 1em;
+  }
+  .ButtonContainer {
+    display: flex;
+    justify-content: space-around;
+  }
+  .ButtonContainer > * {
+    width: fit-content;
+    font-size: 1em;
+  }
+  .ButtonContainer {
+    flex-direction: row;
+    gap: 1em;
+  }
+  .Img {
+    margin-bottom: 0;
+  }
+}
