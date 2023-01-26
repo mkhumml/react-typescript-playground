@@ -1,81 +1,52 @@
-import React, { useState, useEffect } from 'react';
-import workImg from './icon-work.svg'
-import playImg from './icon-play.svg';
-import studyImg from './icon-study.svg';
-import exerciseImg from './icon-exercise.svg';
-import socialImg from './icon-social.svg';
-import selfcareImg from './icon-self-care.svg';
+import { useState } from 'react';
 import styles from './App.module.css';
 import UserCard from './components/UserCard/UserCard';
 import ActivityCard from './components/ActivityCard/ActivityCard';
+import jsonData from './data/data.json'
+import { DisplaySvgArray } from './data/DisplaySvgArray';
+import { PrevText } from './data/PrevText';
 
-/***
- * im component selbst wird kein switch (daily,monthly,weekly) gemacht -> das muss mittels state im hoc erfolgen & dann die angepassten daten runtergeschoben werden.
- * Logik zum abfragen // type switchen also im CNTAINER <3
- ***/
+type Timeframes = {
+  daily: { current: number, previous: number },
+  weekly: { current: number, previous: number },
+  monthly: { current: number, previous: number }
+};
+
+type TimeframesKey = keyof Timeframes;
+
+type IActivityData = {
+  title: string,
+  timeframes: Timeframes,
+}
+
 
 function App() {
-  const [period, setPeriod] = useState("");
+  // only needed when data is non static
+  //const [data, setData] = useState<IActivityData[]>(() => jsonData);
+  const data: IActivityData[] = jsonData;
+  const [timeframe, setTimeframe] = useState<TimeframesKey>("daily");
+  const [activeCard, setActiveCard] = useState<string | undefined>();
 
-  useEffect(() => {
-    console.log("period")
-    console.log(period)
-  }, [period])
 
   return (
     <div className={styles.App}>
-      <UserCard setPeriod={setPeriod} period={period} />
-      <div style={{ display: "flex", gap: "2em", flexWrap: "wrap" }}>
-        <ActivityCard
-          backgroundColor={"hsl(15, 100%, 70%)"}
-          svg={workImg}
-          title="Work"
-          amount={32}
-          prevAmount={36}
-          prevString={"last Week"}
-        />
-        <ActivityCard
-          backgroundColor={"hsl(195, 74%, 62%)"}
-          svg={playImg}
-          title="Play"
-          amount={32}
-          prevAmount={36}
-          prevString={"last Week"}
-        />
-        <ActivityCard
-          backgroundColor={"hsl(348, 100%, 68%)"}
-          svg={studyImg}
-          title="Study"
-          amount={32}
-          prevAmount={36}
-          prevString={"last Week"}
-        />
-        <ActivityCard
-          backgroundColor={"hsl(145, 58%, 55%)"}
-          svg={exerciseImg}
-          title="Exercise"
-          amount={32}
-          prevAmount={36}
-          prevString={"last Week"}
-        />
-        <ActivityCard
-          backgroundColor={"hsl(264, 64%, 52%)"}
-          svg={socialImg}
-          title="Social"
-          amount={32}
-          prevAmount={36}
-          prevString={"last Week"}
-        />
-        <ActivityCard
-          backgroundColor={"hsl(43, 84%, 65%)"}
-          svg={selfcareImg}
-          title="Self Care"
-          amount={32}
-          prevAmount={36}
-          prevString={"last Week"}
-        />
+      <UserCard setTimeframe={setTimeframe} timeframe={timeframe} />
+      <div className={styles.ActivityCardsContainer}>
+        {data.map((item, index) =>
+          <ActivityCard
+            setActive={setActiveCard}
+            active={activeCard}
+            key={'ActivityCard-' + index}
+            svg={DisplaySvgArray[index].svg}
+            title={item.title}
+            backgroundColor={DisplaySvgArray[index].backgroundColor}
+            prevAmount={item.timeframes[timeframe].previous}
+            amount={item.timeframes[timeframe].current}
+            prevText={PrevText[timeframe]}
+          />
+        )}
       </div>
-    </div>
+    </div >
   );
 }
 

@@ -1,13 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from './UserCard.module.css';
-import imageJeremy from '../../image-jeremy.png'
+import imageJeremy from '../../images/image-jeremy.png'
 
 type Props = {
-    period: string;
-    setPeriod: Function;
+    timeframe: string;
+    setTimeframe: Function;
 }
 
-const UserCard = ({ period, setPeriod }: Props) => {
+const UserCard = ({ timeframe, setTimeframe }: Props) => {
+    const [active, setActive] = useState(timeframe);
+
+    const handleClick = (e: any) => {
+        setTimeframe(e.target.innerHTML.toLowerCase());
+        setActive(e.target.innerHTML.toLowerCase());
+    }
+
     return (
         <div className={styles.UserCardContainer}>
             <div className={styles.UserContainer}>
@@ -18,9 +25,9 @@ const UserCard = ({ period, setPeriod }: Props) => {
                 </div>
             </div>
             <div className={styles.ButtonContainer}>
-                <button onClick={(e: any) => setPeriod(e.target.innerHTML)}>Daily</button>
-                <button onClick={(e: any) => setPeriod(e.target.innerHTML)}>Weekly</button>
-                <button onClick={(e: any) => setPeriod(e.target.innerHTML)}>Monthly</button>
+                <button className={active === "daily" ? styles.Active : ""} onClick={(e: any) => handleClick(e)}>Daily</button>
+                <button className={active === "weekly" ? styles.Active : ""} onClick={(e: any) => handleClick(e)}>Weekly</button>
+                <button className={active === "monthly" ? styles.Active : ""} onClick={(e: any) => handleClick(e)}>Monthly</button>
             </div>
         </div>
     )

@@ -20,6 +20,17 @@
   margin-bottom: 1.5em;
 }
 
+.ActivityCardsContainer {
+  display: flex;
+  gap: 2em;
+  flex-wrap: wrap;
+}
+
+.ActivityCardsContainer > * {
+  border-radius: 1em;
+  min-width: 300px;
+}
+
 @media only screen and (max-width: 600px) {
   .App {
     margin: 1.5em;

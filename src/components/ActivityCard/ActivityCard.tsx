@@ -1,19 +1,22 @@
-import React from 'react'
+import { useState } from 'react';
 import styles from './ActivityCard.module.css';
-import dots from '../../icon-ellipsis.svg'
+import dots from '../../images/icon-ellipsis.svg'
 
-type Props = {
+type ActivityCardProps = {
     svg: string;
     title: string;
     amount: number;
     prevAmount: number;
-    prevString: string;
+    prevText: string;
     backgroundColor: string;
+    active: string | undefined;
+    setActive: Function;
 }
 
-const ActivityCard = ({ svg, title, amount, prevAmount, prevString, backgroundColor }: Props) => {
+const ActivityCard = ({ svg, title, amount, prevAmount, prevText, backgroundColor, active, setActive }: ActivityCardProps) => {
+
     return (
-        <div className={styles.ActivityCardContainer} style={{ backgroundColor: backgroundColor }}>
+        <div onClick={() => setActive(title)} className={`${styles.ActivityCardContainer} ${active === title ? styles.Active : ''}`} style={{ backgroundColor: backgroundColor }}>
             <div className={styles.ActivityCardImgContainer}>
                 <img className={styles.ActivityCardImg} src={svg} alt="work" />
             </div>
@@ -27,7 +30,7 @@ const ActivityCard = ({ svg, title, amount, prevAmount, prevString, backgroundCo
                         {amount} hrs
                     </h4>
                     <h2 className={styles.Head2}>
-                        {prevString} - {prevAmount} hrs
+                        {prevText} - {prevAmount} hrs
                     </h2>
                 </div>
             </div>
